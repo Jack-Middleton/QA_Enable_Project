@@ -80,6 +80,16 @@
 
 ### Entity Relationship Diagrams 
 
+The basic concept for this project is just a Player with a zero to many relationship to Player_character, as a player can have zero, one or many characters
+
+![image](https://user-images.githubusercontent.com/81429555/154951193-dfc1e6bc-2565-4b34-8be6-8768badea6a8.png)
+
+The idea here being that I can use the boolean values in Python in functions designed to use that data to fill out the rest of the character sheet
+
+![image](https://user-images.githubusercontent.com/81429555/154954170-d4aa9741-9bd9-4e91-9956-526f0596ef1a.png)
+
+in the second image, I expanded on my initial idea adding in a dm, npc, spell and equipment tables, because in a real D&D setting these would be necessary to have, even if all the fields are null
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
