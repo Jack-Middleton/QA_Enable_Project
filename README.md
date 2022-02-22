@@ -29,7 +29,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#Why-are-we-doing-this">Why are we doing this?</a>
+      <a href="#The-idea">The idea</a>
         <li><a href="#built-with">Built With</a></li>
     </li>
   <li><a href="Entity-Relationship-Diagrams"> Entity Relationship Diagrams </a></li>
@@ -48,9 +48,15 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## Why are we doing this 
+## The idea
+At its core, I wanted something that I could use in my home D&D games whilst also being a good project to showcase the things I've learnt so far on this bootcamp. 
+So, going along with that, the original idea was to have a database of character sheet(s) and their associated players (if any), so that I could easily keep track and make changes, this came about because the mobile app I use requires you to pay to have more than 2 character sheets, and the online portals I have used have been clunky at best. 
+It should also allow for incremental creation ie; not all fields have to be filled in during creation, to allow for more long term character design and planning, as well as associating players with their characters at a later date and vice versa. 
 
-
+Using this idea as a starting point, I then thought it would be a good idea to expand on this, I decided to associate a DM with his respective players (if any)
+and the DM to his planned NPC's. This then led to the idea that, some characters can cast spells, and almost all start with / need some way to track equipment. 
+ 
+From the get go, I'd like to find a way to implement a log-in system, so that I can give this to my friends and they can also use it, as well as a few other stretch goals designed to allow more people to use it, but this is the core idea.  
 
 <details>
 <summary>The MVP targets for this project were</summary>
