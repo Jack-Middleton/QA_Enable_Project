@@ -12,11 +12,31 @@ def home():
 # search by table name
 # search by some detail from within a table ie; a DM name
 # search by a primary key from a table
-@app.route('/search/<keyword>')
-@app.route('/search/<keyword>/<details>')
-@app.route('/search/<keyword>/<id>')
-def search():
-    
+@app.route('/searchdm')
+@app.route('/searchdm/<field>')
+@app.route('/searchdm/<details>')
+@app.route('/searchdm/<id>')
+def searchdm(details=None,field=None, id=None):
+    if not details and not id:
+        data = db.session.execute(f"SELECT * FROM dm")
+        result = list('<br>'.join([str(res) for res in data]))
+        length_check = len(result)
+        return render_template('search.html', output = result, length = length_check)
+    elif details and not id:
+        data = db.session.execute(f"SELECT * FROM dm WHERE {field} LIKE '%{details}%'")
+        result = list('<br>'.join([str(res) for res in data]))
+        length_check = len(result)
+        return render_template('search.html', output = result, length = length_check)
+    elif field and not details and not id:
+        data = db.session.execute(f"SELECT {field} FROM dm")
+        result = list('<br>'.join([str(res) for res in data]))
+        length_check = len(result)
+        return render_template('search.html', output = result, length = length_check)
+    elif id:
+        data = db.session.execute(f"SELECT * FROM dm WHERE dm_id={id}")
+        result = list('<br>'.join([str(res) for res in data]))
+        length_check = len(result)
+        return render_template('search.html', output = result, length = length_check)
     return 
 
 @app.route('/delete/<id>')
