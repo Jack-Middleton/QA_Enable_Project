@@ -1,10 +1,13 @@
-from flask import redirect, url_for
+from flask import redirect, url_for, render_template
 from application import app, db
-# from application.models import names of databases
+from application.models import DM
 
 @app.route('/')
 def home():
-    return
+    num_DMs = DM.query.count()
+    return render_template('index.html', num = num_DMs)
+    # todos = [str(todo) + " " + str(todo.project) for todo in Todo.query.all()]
+    # and then in html - {{ to do }} in side a {% for %} {% end for %}
 
 # search by table name
 # search by some detail from within a table ie; a DM name
@@ -13,6 +16,7 @@ def home():
 @app.route('/search/<keyword>/<details>')
 @app.route('/search/<keyword>/<id>')
 def search():
+    
     return 
 
 @app.route('/delete/<id>')
@@ -22,7 +26,7 @@ def delete():
 # update by table name, the column, find the ID that needs updating and then the new info
 # or correct all entries in a column for general typo's/spelling errors
 @app.route('/update/<keyword>/<field>/<id>/<newinfo>')
-@app.route('/update/<keyword>/<field>/<oldinfo>/<new info>')
+@app.route('/update/<keyword>/<field>/<oldinfo>/<newinfo>')
 def update():
     return
 
