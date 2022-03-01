@@ -2,4 +2,7 @@
 {% block body %} 
     <h2>Home</h2>
     <p>There are {{num}} DM's</p>
+    {% for dm in DMs %} 
+    <p>{{ dm }}</p>
+    {% endfor %}
 {% endblock body %}

@@ -5,19 +5,41 @@ from application.models import DM
 @app.route('/')
 def home():
     num_DMs = DM.query.count()
-    return render_template('index.html', num = num_DMs)
-    # todos = [str(todo) + " " + str(todo.project) for todo in Todo.query.all()]
+    dm_list = [str(dm) for dm in DM.query.all()]
+    #dm_list = [str(DM) + " " + str(todo.project) for todo in Todo.query.all()]
+    return render_template('index.html', num = num_DMs, DMs = dm_list)
+    
     # and then in html - {{ to do }} in side a {% for %} {% end for %}
 
 # search by table name
 # search by some detail from within a table ie; a DM name
 # search by a primary key from a table
-@app.route('/search/<keyword>')
-@app.route('/search/<keyword>/<details>')
-@app.route('/search/<keyword>/<id>')
-def search():
-    
-    return 
+@app.route('/searchdm')
+@app.route('/searchdm/<field>')
+@app.route('/searchdm/<details>')
+@app.route('/searchdm/<id>')
+# come back to refactor, remove duplicated code
+def searchdm(details=None,field=None, id=None):
+    if not details and not id:
+        data = db.session.execute(f"SELECT * FROM dm")
+        result = list('<br>'.join([str(res) for res in data]))
+        length_check = len(result)
+        return render_template('search.html', output = result, length = length_check)
+    elif details and not id:
+        data = db.session.execute(f"SELECT * FROM dm WHERE {field} LIKE '%{details}%'")
+        result = list('<br>'.join([str(res) for res in data]))
+        length_check = len(result)
+        return render_template('search.html', output = result, length = length_check)
+    elif field and not details and not id:
+        data = db.session.execute(f"SELECT {field} FROM dm")
+        result = list('<br>'.join([str(res) for res in data]))
+        length_check = len(result)
+        return render_template('search.html', output = result, length = length_check)
+    elif id:
+        data = db.session.execute(f"SELECT * FROM dm WHERE dm_id={id}")
+        result = list('<br>'.join([str(res) for res in data]))
+        length_check = len(result)
+        return render_template('search.html', output = result, length = length_check)
 
 @app.route('/delete/<id>')
 def delete():
@@ -32,6 +54,17 @@ def update():
 
 # create an entry in a database, uysing keyword as the table 
 # field as the field needing entry and its info
-@app.route('/create/<keyword>/<field>/<info>')
-def create():
-    return
+@app.route('/createdm/<forename>')
+@app.route('/createdm/<forename>/<surname>')
+@app.route('/createdm/<forename>/<surname>/<npc_id>')
+@app.route('/createdm/<forename>/<surname>/<npc_id>/<player_id>')
+def createdm(forename = "", surname = "", npc_id = None, player_id = None):
+    if player_id == None and npc_id == None:
+        new_dm = DM(forename = forename, surname = surname)
+    elif player_id == None:
+        new_dm = DM(forename = forename, surname = surname, npc_id = npc_id)
+    else:
+        new_dm = DM(forename = forename, surname = surname, npc_id = npc_id, player_id = player_id)
+    db.session.add(new_dm)
+    db.session.commit()
+    return render_template('create.html', name = forename)
