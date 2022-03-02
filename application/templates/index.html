@@ -1,8 +1,11 @@
 {% extends 'layout.html' %}
 {% block body %} 
     <h2>Home</h2>
-    <p>There are {{num}} DM's</p>
+    <p>There are {{num}} DM's and {{ no_NPCs }} NPCs </p>
     {% for dm in DMs %} 
     <p>{{ dm }}</p>
     {% endfor %}
+    {% for npc in NPCs %}
+    <p> {{ npc }}</p>
+    {% endfor %} 
 {% endblock body %}

@@ -4,12 +4,10 @@
     </head>
     <body style="background-color: lightblue;">
         <h1>D&D App</h1>
-        <a href="{{ url_for ('home')}}">Home</a>
+        <a href="{{ url_for ('home')}}">Home</a> || 
+        <a href="{{ url_for('createdm') }}">Create DM</a> || 
+        <a href="{{ url_for('createnpc') }}">Create NPC</a>
         {% block body %}
         {% endblock body %}
-        {% block search %}
-        {% endblock search %}
-        {% block create %}
-        {% endblock create %}
     </body>
 </html>
