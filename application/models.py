@@ -16,7 +16,7 @@ class NPC(db.Model):
     npc_race = db.Column(db.String(255))
     npc_details = db.Column(db.String(1000))
     def __str__(self):
-        return f"{self.npc_id} Name:\n\t {self.npc_name} \n Race: \n\t {self.npc_race}\n Details: \n\t {self.npc_details}"
+        return f"Associated DM ID: {self.fk_dm_id} \n NPC ID: {self.npc_id} Name:\n\t {self.npc_name} \n Race: \n\t {self.npc_race}\n Details: \n\t {self.npc_details}"
 
 class Player(db.Model):
     player_id = db.Column(db.Integer, primary_key=True)

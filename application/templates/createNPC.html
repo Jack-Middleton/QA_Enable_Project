@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block body %} 
+    <h2>Create new NPC</h2>
+    <div class="Form">
+
+        <form method="POST" action="">
+
+            {{ form.hidden_tag() }}
+            {{ form.dm_id.label }} || {{ form.dm_id }}
+            <br>
+            {{ form.npc_name.label }} || {{ form.npc_name }}
+            <br>
+            {{ form.npc_race.label }} || {{ form.npc_race }} 
+            <br>
+            {{ form.npc_details.label }} || {{ form.npc_details }} 
+            <br>
+            {{ form.submit }}
+
+        </form>
+
+    </div>
+{% endblock body %}
