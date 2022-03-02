@@ -18,10 +18,7 @@ def home():
 @app.route('/searchdm/<field>')
 @app.route('/searchdm/<details>')
 @app.route('/searchdm/<id>')
-<<<<<<< HEAD
 # come back to refactor, remove duplicated code
-=======
->>>>>>> db19abcb579bd4d6b4e0c72038c12c30d5a51087
 def searchdm(details=None,field=None, id=None):
     if not details and not id:
         data = db.session.execute(f"SELECT * FROM dm")
