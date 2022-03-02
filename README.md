@@ -55,8 +55,7 @@ It should also allow for incremental creation ie; not all fields have to be fill
 
 Using this idea as a starting point, I then thought it would be a good idea to expand on this, I decided to associate a DM with his respective players (if any)
 and the DM to his planned NPC's. This then led to the idea that, some characters can cast spells, and almost all start with / need some way to track equipment. 
- 
-From the get go, I'd like to find a way to implement a log-in system, so that I can give this to my friends and they can also use it, as well as a few other stretch goals designed to allow more people to use it, but this is the core idea.  
+
 
 <details>
 <summary>The MVP targets for this project were</summary>
