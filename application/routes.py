@@ -13,48 +13,44 @@ def home():
     return render_template('index.html', ptitle = 'Home Page' ,num = num_DMs, npcs = npc_list, DMs = dm_list, no_NPCs = num_NPCs)
 
 
-# search by table name
-# search by some detail from within a table ie; a DM name
-# search by a primary key from a table
-# @app.route('/searchdm')
-# @app.route('/searchdm/<field>')
-# @app.route('/searchdm/<details>')
-# @app.route('/searchdm/<id>')
-# # come back to refactor, remove duplicated code
-# def searchdm(details=None,field=None, id=None):
-#     if not details and not id:
-#         data = db.session.execute(f"SELECT * FROM dm")
-#         result = list('<br>'.join([str(res) for res in data]))
-#         length_check = len(result)
-#         return render_template('search.html', output = result, length = length_check)
-#     elif details and not id:
-#         data = db.session.execute(f"SELECT * FROM dm WHERE {field} LIKE '%{details}%'")
-#         result = list('<br>'.join([str(res) for res in data]))
-#         length_check = len(result)
-#         return render_template('search.html', output = result, length = length_check)
-#     elif field and not details and not id:
-#         data = db.session.execute(f"SELECT {field} FROM dm")
-#         result = list('<br>'.join([str(res) for res in data]))
-#         length_check = len(result)
-#         return render_template('search.html', output = result, length = length_check)
-#     elif id:
-#         data = db.session.execute(f"SELECT * FROM dm WHERE dm_id={id}")
-#         result = list('<br>'.join([str(res) for res in data]))
-#         length_check = len(result)
-#         return render_template('search.html', output = result, length = length_check)
-
-@app.route('/searchpage/int:<pk>')
-def searchpage(pk):
-    dm = DM.query.get(pk)
-    dm_npcs = list(str(npc) for npc in dm.dm_npcs)
-    return render_template('DMsearch.html',list = dm_npcs, ptitle = "List of DM associated NPCs")
-
+# Below is the CRUD functionality associated to the DM table
 @app.route('/deletedm/<int:pk>')
 def deletedm(pk):
     todelete = DM.query.get(pk)
     db.session.delete(todelete)
     db.session.commit()
     return redirect(url_for('home'))
+
+@app.route('/searchpage/int:<pk>')
+def searchpage(pk):
+    dm = DM.query.get(pk)
+    dm_npcs = dm.dm_npcs
+    return render_template('DMsearch.html',list = dm_npcs, ptitle = "List of DM associated NPCs")
+
+@app.route('/updatedm/<int:pk>', methods=['POST', 'GET'])
+def updatedm(pk):
+    dm = DM.query.get(pk)
+    Form = CreateDM()
+    if request.method == 'POST':
+        dm.forename = Form.forename.data
+        dm.surname = Form.surname.data
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('createdDM', form = Form, ptitle = 'Update DM')
+
+@app.route('/createdm', methods=['GET', 'POST'])
+def createdm():
+    Form = CreateDM()
+    if request.method == 'POST':
+        forename = Form.forename.data
+        surname = Form.surname.data
+        new_dm = DM(forename=forename, surname=surname)
+        db.session.add(new_dm)
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('createDM.html', form = Form, ptitle = 'Create DM')
+
+# Below is the CRUD functionality for the NPC table
 
 @app.route('/deletenpc/<int:pk>')
 def deletenpc(pk):
@@ -77,33 +73,6 @@ def updatenpc(pk):
         db.session.commit()
         return redirect(url_for('home'))
     return render_template('createNPC.html', form = Form, ptitle = "Update NPC")
-
-@app.route('/updatedm/<int:pk>', methods=['POST', 'GET'])
-def updatedm(pk):
-    dm = DM.query.get(pk)
-    Form = CreateDM()
-    if request.method == 'POST':
-        dm.forename = Form.forename.data
-        dm.surname = Form.surname.data
-        db.session.commit()
-        return redirect(url_for('home'))
-    return render_template('createdDM', form = Form, ptitle = 'Update DM')
-
-# create an entry in a database, uysing keyword as the table 
-# field as the field needing entry and its info
-@app.route('/createdm', methods=['GET', 'POST'])
-def createdm():
-    Form = CreateDM()
-    if request.method == 'POST':
-        forename = Form.forename.data
-        surname = Form.surname.data
-        new_dm = DM(forename=forename, surname=surname)
-        db.session.add(new_dm)
-        db.session.commit()
-        return redirect(url_for('home'))
-    return render_template('createDM.html', form = Form, ptitle = 'Create DM')
-
-
 
 @app.route('/createnpc', methods=['GET', 'POST'])
 def createnpc():

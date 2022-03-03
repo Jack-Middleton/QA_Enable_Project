@@ -2,7 +2,9 @@
 {% block body %} 
 <h2> {{ptitle}} </h2>
 {% for npc in list %}
-{{ npc }}
+{{ npc.__str__() }}
+<a href="{{ url_for('updatenpc', pk=npc.npc_id)}}">Update NPC</a> 
+|| <a href="{{url_for('deletenpc', pk = npc.npc_id) }}"> Delete </a> 
 <br>
 ----------------------------
 <br>
