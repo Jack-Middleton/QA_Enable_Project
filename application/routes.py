@@ -36,7 +36,7 @@ def updatedm(pk):
         dm.surname = Form.surname.data
         db.session.commit()
         return redirect(url_for('home'))
-    return render_template('createdDM', form = Form, ptitle = 'Update DM')
+    return render_template('createDM.html', form = Form, ptitle = 'Update DM')
 
 @app.route('/createdm', methods=['GET', 'POST'])
 def createdm():
