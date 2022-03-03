@@ -7,7 +7,7 @@ class DM(db.Model):
     dm_npcs = db.relationship('NPC', backref='dm')
     dm_players = db.relationship('Player', backref='dm')
     def __str__(self):
-        return f"DM: \n {self.forename} {self.surname} "
+        return f"ID: {self.dm_id} || {self.forename} {self.surname} "
 
 class NPC(db.Model):
     npc_id = db.Column(db.Integer, primary_key=True)
@@ -16,7 +16,7 @@ class NPC(db.Model):
     npc_race = db.Column(db.String(255))
     npc_details = db.Column(db.String(1000))
     def __str__(self):
-        return f"NPC ID: {self.npc_id} || Name:{self.npc_name} || Race: {self.npc_race} ||Details: {self.npc_details}"
+        return f"NPC ID: {self.npc_id} || Name: {self.npc_name} || Race: {self.npc_race} || Details: {self.npc_details}"
 
 class Player(db.Model):
     player_id = db.Column(db.Integer, primary_key=True)
