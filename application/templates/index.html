@@ -1,25 +1,34 @@
 {% extends 'layout.html' %}
 {% block body %} 
-    <h2>{{ ptitle }}</h2>
-    <p>There are {{num}} DM's and {{ no_NPCs }} NPCs </p>
+<div class="container-fluid text-left">
+    <h1 >{{ ptitle }}</h1>
+    <h3>There are {{num}} DM's and {{ no_NPCs }} NPCs </h3>
     <h1> DMs </h1>
     {% for dm in DMs %} 
     {{ dm.__str__()  }}
-    <a href="{{ url_for('updatedm', pk=dm.dm_id) }}"> Update DM </a>
-    || <a href="{{ url_for('deletedm', pk=dm.dm_id) }}"> Delete </a>
-    || <a href="{{ url_for('searchpage', pk=dm.dm_id) }}"> Show NPCs for this DM </a>
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary"><a href="{{ url_for('updatedm', pk=dm.dm_id) }}"> Update DM </a></button>
+        <button type="button" class="btn btn-primary"><a href="{{ url_for('deletedm', pk=dm.dm_id) }}"> Delete </a></button>
+        <button type="button" class="btn btn-primary"><a href="{{ url_for('searchpage', pk=dm.dm_id) }}"> Show NPCs for this DM </a></button>
+      </div>
     <br>
-    ----------------------------
     <br>
     {% endfor %}
-    <h2> NPCs </h2>
+    <h1> NPCs </h1>
     {% for npc in npcs %}
     {{ npc.__str__() }} 
-    <a href="{{ url_for('updatenpc', pk=npc.npc_id)}}">Update NPC</a> 
-    || <a href="{{url_for('deletenpc', pk = npc.npc_id) }}"> Delete </a>
+    <div class="btn-group">
+
+        <button type="button" class="btn btn-primary">
+            <a href="{{ url_for('updatenpc', pk=npc.npc_id)}}">Update NPC</a>
+        </button>
+        <button type="button" class="btn btn-primary">
+            <a href="{{url_for('deletenpc', pk = npc.npc_id) }}"> Delete </a>
+        </button>
+    </div>
     <br>
-    ----------------------------
     <br>
     {% endfor %}
+</div>
 
 {% endblock body %}
