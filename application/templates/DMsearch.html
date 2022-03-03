@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% block body %} 
+<h2> {{ptitle}} </h2>
+{% for npc in list %}
+{{ npc }}
+<br>
+----------------------------
+<br>
+{% endfor %}
+{% endblock body %}
+

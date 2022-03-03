@@ -15,4 +15,3 @@ class CreateNPC(FlaskForm):
             ('Tiefling', 'Tiefling')] )
     npc_details = StringField('Details of the NPC eg; equipment, basic stats etc.')
     submit = SubmitField('Submit')
-

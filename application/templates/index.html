@@ -1,10 +1,25 @@
 {% extends 'layout.html' %}
 {% block body %} 
-    <h2>Home</h2>
+    <h2>{{ ptitle }}</h2>
     <p>There are {{num}} DM's and {{ no_NPCs }} NPCs </p>
+    <h1> DMs </h1>
     {% for dm in DMs %} 
-    <p>{{ dm.__str__() + " " + dm_npc[dm]  }}</p> 
-    <a href="{{ url_for('updatenpc', pk=dm.dm_id)}}">Update NPC</a>
-    <!-- <a href="{{ url_for('updatenpc', pk=dm.dm_id) }}">Update DM</a> -->
+    {{ dm.__str__()  }}
+    <a href="{{ url_for('updatedm', pk=dm.dm_id) }}"> Update DM </a>
+    || <a href="{{ url_for('deletedm', pk=dm.dm_id) }}"> Delete </a>
+    || <a href="{{ url_for('searchpage', pk=dm.dm_id) }}"> Show NPCs for this DM </a>
+    <br>
+    ----------------------------
+    <br>
     {% endfor %}
+    <h2> NPCs </h2>
+    {% for npc in npcs %}
+    {{ npc.__str__() }} 
+    <a href="{{ url_for('updatenpc', pk=npc.npc_id)}}">Update NPC</a> 
+    || <a href="{{url_for('deletenpc', pk = npc.npc_id) }}"> Delete </a>
+    <br>
+    ----------------------------
+    <br>
+    {% endfor %}
+
 {% endblock body %}
