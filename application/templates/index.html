@@ -3,9 +3,8 @@
     <h2>Home</h2>
     <p>There are {{num}} DM's and {{ no_NPCs }} NPCs </p>
     {% for dm in DMs %} 
-    <p>{{ dm }}</p>
+    <p>{{ dm.__str__() + " " + dm_npc[dm]  }}</p> 
+    <a href="{{ url_for('updatenpc', pk=dm.dm_id)}}">Update NPC</a>
+    <!-- <a href="{{ url_for('updatenpc', pk=dm.dm_id) }}">Update DM</a> -->
     {% endfor %}
-    {% for npc in NPCs %}
-    <p> {{ npc }}</p>
-    {% endfor %} 
 {% endblock body %}
