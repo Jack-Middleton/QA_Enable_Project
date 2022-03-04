@@ -1,7 +1,8 @@
 from flask import redirect, url_for, render_template, request
-from application import app, db
-from application.models import DM, NPC, Player
+from application import app, db, player_character
+from application.models import DM, NPC, Player, Player_character
 from application.forms import CreateDM, CreateNPC, CreatePlayer
+
 
 @app.route('/')
 def home():
@@ -11,8 +12,11 @@ def home():
     npc_list = list(NPC.query.all())
     player_list = list(Player.query.all())
     num_players = Player.query.count()
+    num_characters = Player_character.query.count()
+    character_list = list(Player_character.query.all())
     return render_template('index.html', ptitle = 'Home Page' ,num = num_DMs, npcs = npc_list, \
-        DMs = dm_list, no_NPCs = num_NPCs, players = player_list, no_players = num_players)
+        DMs = dm_list, no_NPCs = num_NPCs, players = player_list, no_players = num_players,\
+            no_characters=num_characters, characters=character_list )
 
 
 # Below is the CRUD functionality associated to the DM table
@@ -136,3 +140,4 @@ def deleteplayer(pk):
     db.session.delete(todelete)
     db.session.commit()
     return redirect(url_for('home'))
+

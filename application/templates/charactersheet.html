@@ -1,0 +1,170 @@
+{% extends 'layout.html' %}
+{% block body %} 
+<div class="container" style="background-color:rgba(216, 216, 69, 0.589);border-style: solid; border-color: black; border-width: 2px;">
+    <div class="row" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+        <h3> Player: {{player}} </h3>
+    </div>
+    <div class="row" style="background-color:rgba(216, 216, 69, 0.589);">
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Name: {{ name }} </h3>
+        </div>
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Level: {{ level }} </h3>
+        </div>
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Class: {{ class_ }} </h3>
+        </div>
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Race: {{race}} </h3>
+        </div>
+    </div>
+    <br>
+    <div class="row" style="background-color:rgba(216, 216, 69, 0.589);">
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Constitution: {{ constitution }} </h3>
+        </div>
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Constitution Save: {{ constitution_save }} </h3>
+        </div>
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Proficiency Bonus: {{ proficiency }} </h3>
+        </div>
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Initiative: {{initiative}} </h3>
+        </div>
+    </div>
+    <div class="row" style="background-color:rgba(216, 216, 69, 0.589);">
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Strength: {{ strength }} </h3>
+        </div>
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Strength Save: {{ strength_save }} </h3>
+        </div>
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> HP Coming Later </h3>
+        </div>
+        <div class="col-sm-4" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Personality traits coming later </h3>
+        </div>
+    </div>
+    <div class="row" style="background-color:rgba(216, 216, 69, 0.589);">
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Dexterity: {{ dexterity }} </h3>
+        </div>
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Dexterity Save: {{ dexterity_save }} </h3>
+        </div>
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Hit Dice Coming Later </h3>
+        </div>
+        <div class="col-sm-4" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Ideals coming later </h3>
+        </div>
+    </div>
+    <div class="row" style="background-color:rgba(216, 216, 69, 0.589);">
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Wisdom: {{ wisdom }} </h3>
+        </div>
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Wisdom Save: {{ wisdom_save }} </h3>
+        </div>
+        <div class="col-sm-4" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Equipment Coming Later </h3>
+        </div>
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Bonds coming later </h3>
+        </div>
+    </div>
+    <div class="row" style="background-color:rgba(216, 216, 69, 0.589);">
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Intelligence: {{ intelligence }} </h3>
+        </div>
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Intelligence Save: {{ intelligence_save }} </h3>
+        </div>
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Hit Dice Coming Later </h3>
+        </div>
+        <div class="col-sm-4" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Ideals coming later </h3>
+        </div>
+    </div>
+    <div class="row" style="background-color:rgba(216, 216, 69, 0.589);">
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Charisma: {{ charisma }} </h3>
+        </div>
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Charisma Save: {{ charisma_save }} </h3>
+        </div>
+        <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Features Coming Later </h3>
+        </div>
+        <div class="col-sm-4" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Traits coming later </h3>
+        </div>
+    </div>
+    <br><br>
+    <div class="row" style="background-color:rgba(216, 216, 69, 0.589);">
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Acrobatics: {{ acrobatics }} </h3>
+        </div>
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Animal Handling: {{ animal_handling }} </h3>
+        </div>
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Arcana: {{ arcana }} </h3>
+        </div>
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Athletics: {{ athletics }} </h3>
+        </div>
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Deception: {{ deception }} </h3>
+        </div>
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> History: {{ history }} </h3>
+        </div>
+    </div>
+    <div class="row" style="background-color:rgba(216, 216, 69, 0.589);">
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Insight: {{ insight }} </h3>
+        </div>
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Intimidation: {{ intimidation }} </h3>
+        </div>
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Investigation: {{ investigation }} </h3>
+        </div>
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Medicine: {{ medicine }} </h3>
+        </div>
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Nature: {{ nature }} </h3>
+        </div>
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Perception: {{ perception }} </h3>
+        </div>
+    </div>
+    <div class="row" style="background-color:rgba(216, 216, 69, 0.589);">
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Performance: {{ performance }} </h3>
+        </div>
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Persuasion: {{ persuasion }} </h3>
+        </div>
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Religion: {{ religion }} </h3>
+        </div>
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Sleight of Hand: {{ sleight_of_hand }} </h3>
+        </div>
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Stealth: {{ stealth }} </h3>
+        </div>
+        <div class="col-sm-2" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
+            <h3> Survival: {{ survival }} </h3>
+        </div>
+    </div>
+    
+
+</div>
+{% endblock body %}
