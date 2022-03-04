@@ -2,7 +2,7 @@
 {% block body %} 
 <div class="container-fluid text-left">
     <h1 >{{ ptitle }}</h1>
-    <h3>There are {{num}} DM's and {{ no_NPCs }} NPCs and {{ no_players }} players </h3>
+    <h3>DMS: {{ num }}, NPCs: {{ no_NPCs }} , Players: {{ no_players }}, Characters: {{ no_characters }}  </h3>
     <h1> DMs </h1>
     {% for dm in DMs %} 
     {{ dm.__str__()  }}
@@ -29,7 +29,6 @@
     <br>
     <br>
     {% endfor %}
-
     <h1> Players </h1>
     {% for player in players %}
     {{ player.__str__() }}
@@ -44,7 +43,24 @@
     </div>
     <br><br>
     {% endfor %}
-    
+    <h1> Characters </h1>
+    {% for character in characters %}
+    {{ character.__str__() }}
+    <div class="btn-group">
+
+        <button type="button" class="btn btn-primary">
+            <a href="{{ url_for('displaycharacter', pk=character.pc_id)}}">Display Character Sheet</a>
+        </button>
+        <button type="button" class="btn btn-primary">
+            <a href="{{ url_for('deletecharacter', pk=character.pc_id)}}">Delete Character</a>
+        </button>
+        <button type="button" class="btn btn-primary">
+            <a href="{{ url_for('updatecharacter', pk=character.pc_id)}}">Update Character</a>
+        </button>
+    </div>
+    <br><br>
+    {% endfor %}
+
 </div>
 
 {% endblock body %}

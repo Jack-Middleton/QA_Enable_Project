@@ -33,17 +33,22 @@ class Player_character(db.Model):
     pc_spells = db.relationship('Spells', backref='player_character')
     pc_equipment = db.relationship('Equipment', backref='player_character')
     name = db.Column(db.String(255))
+    class_ = db.Column(db.String(20))
+    race = db.Column(db.String(20))
     level = db.Column(db.Integer)
     strength = db.Column(db.Integer)
     dexterity = db.Column(db.Integer)
     intelligence = db.Column(db.Integer)
     wisdom = db.Column(db.Integer)
     constitution = db.Column(db.Integer)
+    charisma = db.Column(db.Integer)
     first_saving_throw = db.Column(db.String(15))
     second_saving_throw = db.Column(db.String(15))
     fi_ability_check = db.Column(db.String(15))
     se_ability_check = db.Column(db.String(15))
     th_ability_check = db.Column(db.String(15))
+    def __str__(self):
+        return f"ID: {self.pc_id} || Name: {self.name}, a level {self.level} {self.race} {self.class_}"
 
 class Spells(db.Model):
     spell_id = db.Column(db.Integer, primary_key=True)

@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block body %} 
+<h2>{{ ptitle }}</h2>
+<div class="Form">
+
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        {{ form.player_id.label }} || {{ form.player_id }} 
+        <br>
+        {{ form.name.label }} || {{ form.name }} 
+        <br>
+        {{ form.level.label }} || {{ form.level }} 
+        <br>
+        {{ form.class_.label }} || {{ form.class_ }} 
+        <br>
+        {{ form.race.label }} || {{ form.race }} 
+        <br>
+        {{ form.strength.label }} || {{ form.strength }} 
+        <br>
+        {{ form.dexterity.label }} || {{ form.dexterity }} 
+        <br>
+        {{ form.wisdom.label }} || {{ form.wisdom }} 
+        <br>
+        {{ form.charisma.label }} || {{ form.charisma }} 
+        <br>
+        {{ form.constitution.label }} || {{ form.constitution }} 
+        <br>
+        {{ form.intelligence.label }} || {{ form.intelligence }} 
+        <br>
+        {{ form.fi_ability_check.label }} || {{ form.fi_ability_check }} 
+        <br>
+        {{ form.se_ability_check.label }} || {{ form.se_ability_check }} 
+        <br>
+        {{ form.th_ability_check.label }} || {{ form.th_ability_check }} 
+        <br>
+        {{ form.submit }}
+
+    </form>
+
+</div>
+{% endblock body %}
