@@ -2,14 +2,14 @@
 {% block body %} 
 <div class="container-fluid text-left">
     <h1 >{{ ptitle }}</h1>
-    <h3>There are {{num}} DM's and {{ no_NPCs }} NPCs </h3>
+    <h3>There are {{num}} DM's and {{ no_NPCs }} NPCs and {{ no_players }} players </h3>
     <h1> DMs </h1>
     {% for dm in DMs %} 
     {{ dm.__str__()  }}
     <div class="btn-group">
         <button type="button" class="btn btn-primary"><a href="{{ url_for('updatedm', pk=dm.dm_id) }}"> Update DM </a></button>
         <button type="button" class="btn btn-primary"><a href="{{ url_for('deletedm', pk=dm.dm_id) }}"> Delete </a></button>
-        <button type="button" class="btn btn-primary"><a href="{{ url_for('searchpage', pk=dm.dm_id) }}"> Show NPCs for this DM </a></button>
+        <button type="button" class="btn btn-primary"><a href="{{ url_for('searchnpc', pk=dm.dm_id) }}"> Show NPCs for this DM </a></button>
       </div>
     <br>
     <br>
@@ -29,6 +29,22 @@
     <br>
     <br>
     {% endfor %}
+
+    <h1> Players </h1>
+    {% for player in players %}
+    {{ player.__str__() }}
+    <div class="btn-group">
+
+        <button type="button" class="btn btn-primary">
+            <a href="{{ url_for('updateplayer', pk=player.player_id)}}">Update Player</a>
+        </button>
+        <button type="button" class="btn btn-primary">
+            <a href="{{ url_for('deleteplayer', pk=player.player_id)}}">Delete Player</a>
+        </button>
+    </div>
+    <br><br>
+    {% endfor %}
+    
 </div>
 
 {% endblock body %}

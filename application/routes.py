@@ -1,7 +1,7 @@
 from flask import redirect, url_for, render_template, request
 from application import app, db
-from application.models import DM, NPC
-from application.forms import CreateDM, CreateNPC
+from application.models import DM, NPC, Player
+from application.forms import CreateDM, CreateNPC, CreatePlayer
 
 @app.route('/')
 def home():
@@ -9,8 +9,10 @@ def home():
     num_NPCs = NPC.query.count()
     dm_list = list(DM.query.all())
     npc_list = list(NPC.query.all())
-
-    return render_template('index.html', ptitle = 'Home Page' ,num = num_DMs, npcs = npc_list, DMs = dm_list, no_NPCs = num_NPCs)
+    player_list = list(Player.query.all())
+    num_players = Player.query.count()
+    return render_template('index.html', ptitle = 'Home Page' ,num = num_DMs, npcs = npc_list, \
+        DMs = dm_list, no_NPCs = num_NPCs, players = player_list, no_players = num_players)
 
 
 # Below is the CRUD functionality associated to the DM table
@@ -21,8 +23,8 @@ def deletedm(pk):
     db.session.commit()
     return redirect(url_for('home'))
 
-@app.route('/searchpage/int:<pk>')
-def searchpage(pk):
+@app.route('/searchnpc/int:<pk>')
+def searchnpc(pk):
     dm = DM.query.get(pk)
     dm_npcs = dm.dm_npcs
     return render_template('DMsearch.html',list = dm_npcs, ptitle = "List of DM associated NPCs")
@@ -49,6 +51,9 @@ def createdm():
         db.session.commit()
         return redirect(url_for('home'))
     return render_template('createDM.html', form = Form, ptitle = 'Create DM')
+
+
+
 
 # Below is the CRUD functionality for the NPC table
 
@@ -88,5 +93,46 @@ def createnpc():
         db.session.add(new_npc)
         db.session.commit()
         return redirect(url_for('home'))
-    return render_template('createNPC.html', form = Form, ptitle = 'Create NPC')
+    return render_template('createNPC.html', form = Form, ptitle = 'Create new NPC')
 
+
+
+
+# Below is the CRUD functionality for the player table
+
+@app.route('/createplayer', methods=['GET', 'POST'])
+def createplayer():
+    dm_id = DM.query.all()
+    Form = CreatePlayer()
+    Form.dm_id.choices.extend([( dm.dm_id, str(dm)) for dm in dm_id])
+    if request.method == 'POST':
+        fk_dm_id = Form.dm_id.data
+        forename = Form.forename.data
+        surname = Form.surname.data
+        new_player = Player(fk_dm_id = fk_dm_id, forename = forename, surname = surname)
+        db.session.add(new_player)
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('createPlayer.html', form = Form, ptitle = 'Create new Player')
+
+
+@app.route('/updateplayer/<int:pk>', methods=['GET', 'POST'])
+def updateplayer(pk):
+    player = Player.query.get(pk)
+    dm = DM.query.all()
+    Form = CreatePlayer()
+    Form.dm_id.choices.extend([( dm.dm_id, str(dm)) for dm in dm])
+    if request.method == 'POST':
+        player.fk_dm_id = Form.dm_id.data
+        player.forename = Form.forename.data
+        player.surname = Form.surname.data
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('createPlayer.html', form = Form, ptitle = "Update Player")
+
+@app.route('/deleteplayer/<int:pk>')
+def deleteplayer(pk):
+    todelete = Player.query.get(pk)
+    db.session.delete(todelete)
+    db.session.commit()
+    return redirect(url_for('home'))
