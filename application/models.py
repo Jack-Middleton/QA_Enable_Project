@@ -16,7 +16,7 @@ class NPC(db.Model):
     npc_race = db.Column(db.String(255))
     npc_details = db.Column(db.String(1000))
     def __str__(self):
-        return f"NPC ID: {self.npc_id} || Name: {self.npc_name} || Race: {self.npc_race} || Details: {self.npc_details}"
+        return f"ID: {self.npc_id} || Name: {self.npc_name} || Race: {self.npc_race} || Details: {self.npc_details}"
 
 class Player(db.Model):
     player_id = db.Column(db.Integer, primary_key=True)
@@ -25,7 +25,7 @@ class Player(db.Model):
     surname = db.Column(db.String(255))
     player_characters = db.relationship('Player_character', backref='player')
     def __str__(self):
-        return f"{self.forename} {self.surname}"
+        return f"ID: {self.player_id} || {self.forename} {self.surname}"
 
 class Player_character(db.Model):
     pc_id = db.Column(db.Integer, primary_key=True)
@@ -39,14 +39,11 @@ class Player_character(db.Model):
     intelligence = db.Column(db.Integer)
     wisdom = db.Column(db.Integer)
     constitution = db.Column(db.Integer)
-    charisma = db.Column(db.Boolean())
-    str_save = db.Column(db.Boolean())
-    dex_save = db.Column(db.Boolean())
-    int_save = db.Column(db.Boolean())
-    wis_save = db.Column(db.Boolean())
-    con_save = db.Column(db.Boolean())
-    char_save = db.Column(db.Boolean())
-    # add individual proficiencies / ability checks
+    first_saving_throw = db.Column(db.String(15))
+    second_saving_throw = db.Column(db.String(15))
+    fi_ability_check = db.Column(db.String(15))
+    se_ability_check = db.Column(db.String(15))
+    th_ability_check = db.Column(db.String(15))
 
 class Spells(db.Model):
     spell_id = db.Column(db.Integer, primary_key=True)
