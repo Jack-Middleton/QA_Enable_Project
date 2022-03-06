@@ -87,7 +87,11 @@
             <h3> Intelligence Save: {{ intelligence_save }} </h3>
         </div>
         <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
-            <h3> Hit Dice Coming Later </h3>
+            <h3> Spells </h3>
+            {% for spell in spells %}
+            <h3> {{ spell }} </h3>
+            <br><br>
+            {% endfor %}
         </div>
         <div class="col-sm-4" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
             <h3> Ideals coming later </h3>

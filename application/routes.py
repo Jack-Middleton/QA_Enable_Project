@@ -1,7 +1,7 @@
 from flask import redirect, url_for, render_template, request
 from application import app, db, player_character
-from application.models import DM, NPC, Player, Player_character, Equipment
-from application.forms import CreateDM, CreateNPC, CreatePlayer, CreateEquipment
+from application.models import DM, NPC, Player, Player_character, Equipment, Spells
+from application.forms import CreateDM, CreateNPC, CreatePlayer, CreateEquipment, CreateSpell
 
 
 @app.route('/')
@@ -16,9 +16,12 @@ def home():
     character_list = list(Player_character.query.all())
     num_equipment = Equipment.query.count()
     equipment_list = list(Equipment.query.all())
+    num_spells = Spells.query.count()
+    spell_list = list(Spells.query.all())
     return render_template('index.html', ptitle = 'Home Page' ,num = num_DMs, npcs = npc_list, \
         DMs = dm_list, no_NPCs = num_NPCs, players = player_list, no_players = num_players,\
-            no_characters=num_characters, characters=character_list, no_equipment=num_equipment, equipment=equipment_list )
+            no_characters=num_characters, characters=character_list, no_equipment=num_equipment, equipment=equipment_list, \
+            no_spells = num_spells, spells = spell_list )
 
 
 # Below is the CRUD functionality associated to the DM table
@@ -192,3 +195,45 @@ def updateEquipment(pk):
         db.session.commit()
         return redirect(url_for('home'))
     return render_template('createEquipment.html', form=Form, ptitle=f"Update {equipment.equipment_name}")
+
+
+# Below is CRUD functionality for Spells table 
+
+@app.route('/createspell', methods=['GET', 'POST'])
+def createspell():
+    character_id = Player_character.query.all()
+    Form = CreateSpell()
+    Form.pc_id.choices.extend([(character.pc_id, str(character)) for character in character_id])
+    if request.method == 'POST':
+        fk_pc_id = Form.pc_id.data
+        spell_name = Form.spell_name.data
+        spell_details = Form.spell_details.data
+        spell_level = Form.spell_level.data
+        new_spell = Spells(fk_pc_id=fk_pc_id, spell_name=spell_name, spell_details=spell_details, spell_level=spell_level)
+        db.session.add(new_spell)
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('createSpell.html', form = Form, ptitle = 'Create new Spell')
+
+
+@app.route('/deletespell/<int:pk>')
+def deletespell(pk):
+    todelete = Spells.query.get(pk)
+    db.session.delete(todelete)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+@app.route('/updatespell/<int:pk>')
+def updatespell(pk):
+    spell = Spells.query.get(pk)
+    character_id = Player_character.query.all()
+    Form = CreateSpell()
+    Form.pc_id.choices.extend([(character.pc_id, str(character)) for character in character_id])
+    if request.method == 'POST':
+        spell.fk_pc_id = Form.pc_id.data
+        spell.spell_name = Form.spell_name.data
+        spell.spell_details = Form.spell_details.data
+        spell.spell_level = Form.spell_level.data
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('createSpell.html', form=Form, ptitle=f'Update {spell.spell_name}')

@@ -2,7 +2,7 @@
 {% block body %} 
 <div class="container-fluid text-left">
     <h1 >{{ ptitle }}</h1>
-    <h3>DMS: {{ num }}, NPCs: {{ no_NPCs }} , Players: {{ no_players }}, Characters: {{ no_characters }}, Equipment: {{ no_equipment }}  </h3>
+    <h3>DMS: {{ num }}, NPCs: {{ no_NPCs }} , Players: {{ no_players }}, Characters: {{ no_characters }}, Equipment: {{ no_equipment }}, Spells: {{ no_spells }}  </h3>
     <h1> DMs </h1>
     {% for dm in DMs %} 
     {{ dm.__str__()  }}
@@ -74,6 +74,17 @@
         </button>
 
     </div>
+    <br><br>
+    {% endfor %}
+    <h1> Spells </h1>
+    {% for spell in spells %}
+    {{ spell.__str__() }}
+    <button type="button" class="btn btn-primary">
+        <a href="{{ url_for('deletespell', pk=spell.spell_id)}}">Delete Spell</a>
+    </button>
+    <button type="button" class="btn btn-primary">
+        <a href="{{ url_for('updatespell', pk=spell.spell_id)}}">Update Spell</a>
+    </button>
     <br><br>
     {% endfor %}
 

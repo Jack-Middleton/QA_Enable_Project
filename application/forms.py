@@ -33,10 +33,16 @@ class CreateEquipment(FlaskForm):
          ('Legendary', 'Legendary'), ('Artifact', 'Artifact')])
     submit = SubmitField('Submit')
 
+class CreateSpell(FlaskForm):
+    pc_id = SelectField('Associated Character', choices=[])
+    spell_name = StringField('Spell Name')
+    spell_details = StringField('Spell Details')
+    spell_level = SelectField('Spell Level', choices=[('0','0'),('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9')] )
+    submit = SubmitField('Submit')
 
 
 class CreatePlayerCharacter(FlaskForm):
-    player_id = SelectField('Associated Player', choices=[])
+    player_id = SelectField('Associated Player', choices=[('None', 'None')])
     name = StringField('Characters Name')
     # choices are 1 to 20 hard coded in because levels cannot be lower than 1 or higher than 20
     # this works the same for other stats, but they go up to 24 as some items and abilities allow

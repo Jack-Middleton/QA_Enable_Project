@@ -3,18 +3,28 @@
 # so putting that all into the routes file felt like it would create a bit of a mess
 
 
+
 from flask import redirect, url_for, render_template, request
 from application import app, db
-from application.models import DM, NPC, Player, Player_character, Equipment
+from application.models import DM, NPC, Player, Player_character, Equipment, Spells
 from application.forms import CreateDM, CreateNPC, CreatePlayer, CreatePlayerCharacter
 from math import ceil
 
 @app.route('/displaycharacter/<int:pk>')
 def displaycharacter(pk):
     character = Player_character.query.get(pk)
-    foreign_key = int(character.fk_player_id)
-    player = Player.query.get(foreign_key)
+    # checks if the character has an associated player and assigns the forename, otherwise assigns 'None'
+    # to be displayed
+    if character.fk_player_id == 'None':
+        player_name = 'None'
+    else:
+        foreign_key = int(character.fk_player_id)
+        player = Player.query.get(foreign_key)
+        player_name = player.forename
+        
     equipment = character.pc_equipment
+    spells = character.pc_spells
+    num_spells = Spells.query.count()
     # to determine stats for later, a proficiency bonus is needed using the level
     proficiency = 0
     if character.level <= 4:
@@ -172,8 +182,8 @@ def displaycharacter(pk):
         survival += proficiency
         
         # now send all the information back to the HTML page to be displayed neatly
-    return render_template('charactersheet.html', ptitle='Character Sheet', player=player.forename,\
-            name = character.name, level = character.level, class_ = character.class_, race = character.race, proficiency = proficiency,\
+    return render_template('charactersheet.html', ptitle='Character Sheet', player=player_name,\
+            name = character.name, spells=spells, no_spells=num_spells, level = character.level, class_ = character.class_, race = character.race, proficiency = proficiency,\
             equipment=equipment, strength = strength_bonus, strength_save = str_save, dexterity = dexterity_bonus, dexterity_save = dex_save, \
             intelligence = intelligence_bonus, intelligence_save = int_save, charisma = charisma_bonus, charisma_save = cha_save, \
             constitution = constitution_bonus, constitution_save = con_save, wisdom = wisdom_bonus, wisdom_save = wis_save, 
@@ -229,7 +239,7 @@ def deletecharacter(pk):
     db.session.commit()
     return redirect(url_for('home'))
 
-@app.route('/updatecharacter/<int:pk>')
+@app.route('/updatecharacter/<int:pk>', methods=['GET', 'POST'])
 def updatecharacter(pk):
     Form = CreatePlayerCharacter()
     character = Player_character.query.get(pk)
