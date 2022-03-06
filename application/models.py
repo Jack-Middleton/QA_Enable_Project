@@ -56,6 +56,11 @@ class Spells(db.Model):
     spell_name = db.Column(db.String(255))
     spell_details = db.Column(db.String(1000))
     spell_level = db.Column(db.Integer)
+    def __str__(self):
+        if self.spell_level == 0:
+            return f"{self.spell_name}, {self.spell_details}. This spell is a Cantrip"
+        else:
+            return f"{self.spell_name} || Details: {self.spell_details} || Level: {self.spell_level}"
 
 class Equipment(db.Model):
     # currently only has checks for if it is a weapon

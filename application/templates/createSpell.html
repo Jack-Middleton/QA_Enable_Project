@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block body %} 
+    <h2>{{ ptitle }}</h2>
+    <div class="Form">
+
+        <form method="POST" action="">
+
+            {{ form.hidden_tag() }}
+            {{ form.pc_id.label }} || {{ form.pc_id }}
+            <br>
+            {{ form.spell_name.label }} || {{ form.spell_name }}
+            <br>
+            {{ form.spell_details.label }} || {{ form.spell_details }}
+            <br>
+            {{ form.spell_level.label }} || {{ form.spell_level }}
+            <br>
+            {{ form.submit }}
+
+        </form>
+
+    </div>
+{% endblock body %}
