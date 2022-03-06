@@ -58,15 +58,25 @@ class Spells(db.Model):
     spell_level = db.Column(db.Integer)
 
 class Equipment(db.Model):
+    # currently only has checks for if it is a weapon
     equipment_id = db.Column(db.Integer, primary_key=True)
     fk_pc_id = db.Column(db.Integer, db.ForeignKey('player_character.pc_id'))
     equipment_name = db.Column(db.String(255))
     equipment_details = db.Column(db.String(1000))
-    is_strength = db.Column(db.Boolean())
-    is_dex = db.Column(db.Boolean())
-    is_ranged = db.Column(db.Boolean())
-    is_d4 = db.Column(db.Boolean())
-    is_d6 = db.Column(db.Boolean())
-    is_d8 = db.Column(db.Boolean())
-    is_d10 = db.Column(db.Boolean())
-    is_d12 = db.Column(db.Boolean())
+    is_weapon = db.Column(db.Boolean)
+    # determines if the item is a strength of dex item
+    str_dex  = db.Column(db.String(10))
+    # is the weapon ranged or melee
+    distance = db.Column(db.String(10))
+    # what hit dice does the weapon use if any 
+    dice_type = db.Column(db.Integer)
+    # determines rarity - common through to legendary (inc magic or non)
+    rarity = db.Column(db.String(15))
+    # revisions
+    # add checks for armour / AC buffs
+    def __str__(self):
+        if self.is_weapon:
+            return f"ID: {self.equipment_id} || {self.equipment_name} || A {self.rarity} {self.str_dex} weapon || Range: {self.distance} || On hit: {self.dice_type} "
+        else: 
+            return f"ID: {self.equipment_id} || {self.equipment_name} || {self.equipment_details}"
+    

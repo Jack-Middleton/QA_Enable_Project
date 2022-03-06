@@ -21,6 +21,19 @@ class CreatePlayer(FlaskForm):
     surname = StringField('Surname')
     submit = SubmitField('Submit')
 
+class CreateEquipment(FlaskForm):
+    pc_id = SelectField('Associated Character', choices=[])
+    equipment_name = StringField('Equipment Name')
+    equipment_details = StringField('Equipment Details')
+    is_weapon = BooleanField('Is it a weapon?')
+    str_dex = SelectField('Which stat does the item use?', choices=[('None', 'None'),('Strength', 'Strength'), ('Dexterity', 'Dexterity')])
+    distance = SelectField('is it Ranged / Melee?', choices=[('None', 'None'),('Ranged', 'Ranged'), ('Melee', 'Melee')])
+    dice_type = SelectField('Which dice does it use? ', choices=[('None', 'none'),('D4', 'D4'),('D6', 'D6'),('D8', 'D8'),('D10', 'D10'),('D12', 'D12')])
+    rarity = SelectField('What rarity is the item?', choices = [('Common', 'Common'), ('Uncommon', 'Uncommon'), ('Rare', 'Rare'), ('Very Rare', 'Very Rare'),\
+         ('Legendary', 'Legendary'), ('Artifact', 'Artifact')])
+    submit = SubmitField('Submit')
+
+
 
 class CreatePlayerCharacter(FlaskForm):
     player_id = SelectField('Associated Player', choices=[])
