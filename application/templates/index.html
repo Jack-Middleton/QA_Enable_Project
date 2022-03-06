@@ -2,7 +2,7 @@
 {% block body %} 
 <div class="container-fluid text-left">
     <h1 >{{ ptitle }}</h1>
-    <h3>DMS: {{ num }}, NPCs: {{ no_NPCs }} , Players: {{ no_players }}, Characters: {{ no_characters }}  </h3>
+    <h3>DMS: {{ num }}, NPCs: {{ no_NPCs }} , Players: {{ no_players }}, Characters: {{ no_characters }}, Equipment: {{ no_equipment }}  </h3>
     <h1> DMs </h1>
     {% for dm in DMs %} 
     {{ dm.__str__()  }}
@@ -57,6 +57,22 @@
         <button type="button" class="btn btn-primary">
             <a href="{{ url_for('updatecharacter', pk=character.pc_id)}}">Update Character</a>
         </button>
+    </div>
+    <br><br>
+    {% endfor %}
+
+    <h1> Equipment </h1>
+    {% for equipment in equipment %}
+    {{ equipment.__str__() }}
+    <div class="btn-group">
+
+        <button type="button" class="btn btn-primary">
+            <a href="{{ url_for('deleteEquipment', pk=equipment.equipment_id)}}">Delete Equipment</a>
+        </button>
+        <button type="button" class="btn btn-primary">
+            <a href="{{ url_for('updateEquipment', pk=equipment.equipment_id)}}">Update Equipment</a>
+        </button>
+
     </div>
     <br><br>
     {% endfor %}

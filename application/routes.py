@@ -1,7 +1,7 @@
 from flask import redirect, url_for, render_template, request
 from application import app, db, player_character
-from application.models import DM, NPC, Player, Player_character
-from application.forms import CreateDM, CreateNPC, CreatePlayer
+from application.models import DM, NPC, Player, Player_character, Equipment
+from application.forms import CreateDM, CreateNPC, CreatePlayer, CreateEquipment
 
 
 @app.route('/')
@@ -14,9 +14,11 @@ def home():
     num_players = Player.query.count()
     num_characters = Player_character.query.count()
     character_list = list(Player_character.query.all())
+    num_equipment = Equipment.query.count()
+    equipment_list = list(Equipment.query.all())
     return render_template('index.html', ptitle = 'Home Page' ,num = num_DMs, npcs = npc_list, \
         DMs = dm_list, no_NPCs = num_NPCs, players = player_list, no_players = num_players,\
-            no_characters=num_characters, characters=character_list )
+            no_characters=num_characters, characters=character_list, no_equipment=num_equipment, equipment=equipment_list )
 
 
 # Below is the CRUD functionality associated to the DM table
@@ -141,3 +143,52 @@ def deleteplayer(pk):
     db.session.commit()
     return redirect(url_for('home'))
 
+# Below is the CRUD functionality for the Equipment table
+
+@app.route('/createEquipment', methods=['GET', 'POST'])
+def createEquipment():
+    character_id = Player_character.query.all()
+    Form = CreateEquipment()
+    Form.pc_id.choices.extend([(character.pc_id, str(character)) for character in character_id])
+    if request.method == 'POST':
+        fk_pc_id = Form.pc_id.data 
+        equipment_name = Form.equipment_name.data
+        equipment_details = Form.equipment_details.data 
+        is_weapon = Form.is_weapon.data
+        str_dex = Form.str_dex.data  
+        distance = Form.distance.data 
+        dice_type = Form.dice_type.data
+        rarity = Form.rarity.data
+        new_equipment = Equipment(fk_pc_id=fk_pc_id, equipment_name=equipment_name, \
+            equipment_details=equipment_details, is_weapon=is_weapon, str_dex=str_dex, distance=distance, \
+            dice_type=dice_type, rarity=rarity)
+        db.session.add(new_equipment)
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('createEquipment.html', form=Form, ptitle='Create new Equipment')
+
+@app.route('/deleteEquipment/<int:pk>')
+def deleteEquipment(pk):
+    todelete = Equipment.query.get(pk)
+    db.session.delete(todelete)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+@app.route('/updateEquipment/<int:pk>', methods=['GET','POST'])
+def updateEquipment(pk):
+    equipment = Equipment.query.get(pk)
+    character_id = Player_character.query.all()
+    Form = CreateEquipment()
+    Form.pc_id.choices.extend([(character.pc_id, str(character)) for character in character_id])
+    if request.method == 'POST':
+        equipment.fk_pc_id = Form.pc_id.data 
+        equipment.equipment_name = Form.equipment_name.data
+        equipment.equipment_details = Form.equipment_details.data 
+        equipment.is_weapon = Form.is_weapon.data
+        equipment.str_dex = Form.str_dex.data  
+        equipment.distance = Form.distance.data 
+        equipment.dice_type = Form.dice_type.data
+        equipment.rarity = Form.rarity.data
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('createEquipment.html', form=Form, ptitle=f"Update {equipment.equipment_name}")

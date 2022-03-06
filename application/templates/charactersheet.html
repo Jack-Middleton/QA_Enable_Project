@@ -69,7 +69,11 @@
             <h3> Wisdom Save: {{ wisdom_save }} </h3>
         </div>
         <div class="col-sm-4" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
-            <h3> Equipment Coming Later </h3>
+            <h3> Equipment: </h3>
+            {% for equipment in equipment %}
+            {{ equipment }}
+            <br>
+            {% endfor %}
         </div>
         <div class="col-sm-3" style="background-color:rgba(216, 216, 69, 0.589); border-style: solid;">
             <h3> Bonds coming later </h3>
@@ -164,7 +168,5 @@
             <h3> Survival: {{ survival }} </h3>
         </div>
     </div>
-    
-
 </div>
 {% endblock body %}
