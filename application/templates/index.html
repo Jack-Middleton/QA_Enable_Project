@@ -5,18 +5,19 @@
     <h3>DMS: {{ num }}, NPCs: {{ no_NPCs }} , Players: {{ no_players }}, Characters: {{ no_characters }}, Equipment: {{ no_equipment }}, Spells: {{ no_spells }}  </h3>
     <h1> DMs </h1>
     {% for dm in DMs %} 
-    {{ dm.__str__()  }}
+    <h3> {{ dm.__str__()  }} </h3>
     <div class="btn-group">
         <button type="button" class="btn btn-primary"><a href="{{ url_for('updatedm', pk=dm.dm_id) }}"> Update DM </a></button>
         <button type="button" class="btn btn-primary"><a href="{{ url_for('deletedm', pk=dm.dm_id) }}"> Delete </a></button>
         <button type="button" class="btn btn-primary"><a href="{{ url_for('searchnpc', pk=dm.dm_id) }}"> Show NPCs for this DM </a></button>
+        <button type="button" class="btn btn-primary"><a href="{{ url_for('searchplayer', pk=dm.dm_id) }}"> Show Players for this DM </a></button>
       </div>
     <br>
     <br>
     {% endfor %}
     <h1> NPCs </h1>
     {% for npc in npcs %}
-    {{ npc.__str__() }} 
+    <h3> {{ npc.__str__() }}  </h3>
     <div class="btn-group">
 
         <button type="button" class="btn btn-primary">
@@ -31,31 +32,44 @@
     {% endfor %}
     <h1> Players </h1>
     {% for player in players %}
-    {{ player.__str__() }}
+    <h3> {{ player.__str__() }} </h3>
     <div class="btn-group">
 
+        
+        <button type="button" class="btn btn-primary">
+            <a href="{{ url_for('deleteplayer', pk=player.player_id)}}">Delete Player</a>
+        </button>
         <button type="button" class="btn btn-primary">
             <a href="{{ url_for('updateplayer', pk=player.player_id)}}">Update Player</a>
         </button>
         <button type="button" class="btn btn-primary">
-            <a href="{{ url_for('deleteplayer', pk=player.player_id)}}">Delete Player</a>
+            <a href="{{ url_for('searchcharacter', pk=player.player_id)}}">Show Characters</a>
         </button>
+
     </div>
     <br><br>
     {% endfor %}
     <h1> Characters </h1>
     {% for character in characters %}
-    {{ character.__str__() }}
+    <h3>  {{ character.__str__() }} </h3>
+   
     <div class="btn-group">
 
-        <button type="button" class="btn btn-primary">
-            <a href="{{ url_for('displaycharacter', pk=character.pc_id)}}">Display Character Sheet</a>
-        </button>
+        
         <button type="button" class="btn btn-primary">
             <a href="{{ url_for('deletecharacter', pk=character.pc_id)}}">Delete Character</a>
         </button>
         <button type="button" class="btn btn-primary">
             <a href="{{ url_for('updatecharacter', pk=character.pc_id)}}">Update Character</a>
+        </button>
+        <button type="button" class="btn btn-primary">
+            <a href="{{ url_for('displaycharacter', pk=character.pc_id)}}">Display Character Sheet</a>
+        </button>
+        <button type="button" class="btn btn-primary">
+            <a href="{{ url_for('searchspells', pk=character.pc_id)}}">Show Spells for this Character</a>
+        </button>
+        <button type="button" class="btn btn-primary">
+            <a href="{{ url_for('searchequipment', pk=character.pc_id)}}">Show Equipment for this Character</a>
         </button>
     </div>
     <br><br>
@@ -63,9 +77,8 @@
 
     <h1> Equipment </h1>
     {% for equipment in equipment %}
-    {{ equipment.__str__() }}
+    <h3> {{ equipment.__str__() }} </h3>
     <div class="btn-group">
-
         <button type="button" class="btn btn-primary">
             <a href="{{ url_for('deleteEquipment', pk=equipment.equipment_id)}}">Delete Equipment</a>
         </button>
@@ -77,7 +90,7 @@
     <br><br>
     {% endfor %}
     <h1> Spells </h1>
-    {% for spell in spells %}
+    <h3> {% for spell in spells %} </h3>
     {{ spell.__str__() }}
     <button type="button" class="btn btn-primary">
         <a href="{{ url_for('deletespell', pk=spell.spell_id)}}">Delete Spell</a>

@@ -12,18 +12,33 @@ from math import ceil
 
 @app.route('/displaycharacter/<int:pk>')
 def displaycharacter(pk):
+    if Player_character.query.count() == 0:
+        return redirect(url_for('home'))
     character = Player_character.query.get(pk)
     # checks if the character has an associated player and assigns the forename, otherwise assigns 'None'
     # to be displayed
-    if character.fk_player_id == 'None':
+    if Player.query.count() == 0:
+        player_name = 'None'
+    elif character.fk_player_id == 'None':
         player_name = 'None'
     else:
         foreign_key = int(character.fk_player_id)
         player = Player.query.get(foreign_key)
         player_name = player.forename
-        
-    equipment = character.pc_equipment
-    spells = character.pc_spells
+    
+    if Equipment.query.count() == 0:
+        equipment = 'No Equipment'
+    elif character.pc_equipment == 'None':
+        equipment = 'No Equipment'
+    else:
+        equipment = character.pc_equipment
+
+    if Spells.query.count() == 0:
+        spells = 'No Spells'
+    elif character.pc_spells == 'None':
+        spells = 'No Spells'
+    else:
+        spells = character.pc_spells
     num_spells = Spells.query.count()
     # to determine stats for later, a proficiency bonus is needed using the level
     proficiency = 0
@@ -230,7 +245,19 @@ def createcharacter():
         db.session.commit()
         return redirect(url_for('home'))
     return render_template('createCharacter.html', form=Form, ptitle='Create a new character')
-       
+
+@app.route('/searchspells/<int:pk>')
+def searchspells(pk):
+    character = Player_character.query.get(pk)
+    pc_spells = character.pc_spells
+    return render_template('searchSpells.html', list = pc_spells, ptitle = f"List of Spells for {character.name}")
+
+@app.route('/searchequipment/<int:pk>')
+def searchequipment(pk):
+    character = Player_character.query.get(pk)
+    pc_equipment = character.pc_equipment
+    return render_template('searchEquipment.html', list = pc_equipment, ptitle = f"List of Equipment for {character.name}")
+     
 
 @app.route('/deletecharacter/<int:pk>')
 def deletecharacter(pk):
