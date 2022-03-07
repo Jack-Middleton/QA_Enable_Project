@@ -39,7 +39,7 @@ def searchnpc(pk):
         return render_template('blankSearch.html', ptitle="No NPCs to display!")
     else:
         dm_npcs = dm.dm_npcs
-    return render_template('SearchNPC.html',list = dm_npcs, ptitle = f"List of NPCs for {dm.forename}")
+    return render_template('searchNPC.html',list = dm_npcs, ptitle = f"List of NPCs for {dm.forename}")
 
 @app.route('/searchplayer/<int:pk>')
 def searchplayer(pk):
@@ -248,7 +248,7 @@ def deletespell(pk):
     db.session.commit()
     return redirect(url_for('home'))
 
-@app.route('/updatespell/<int:pk>')
+@app.route('/updatespell/<int:pk>', methods=['GET', 'POST'])
 def updatespell(pk):
     spell = Spells.query.get(pk)
     character_id = Player_character.query.all()

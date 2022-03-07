@@ -13,12 +13,12 @@ from math import ceil
 @app.route('/displaycharacter/<int:pk>')
 def displaycharacter(pk):
     if Player_character.query.count() == 0:
-        return redirect(url_for('home'))
+        return render_template('blankSearch.html', ptitle=['No Character Sheet to display'])
     character = Player_character.query.get(pk)
     # checks if the character has an associated player and assigns the forename, otherwise assigns 'None'
     # to be displayed
     if Player.query.count() == 0:
-        player_name = 'None'
+        player_name = ['None']
     elif character.fk_player_id == 'None':
         player_name = 'None'
     else:
@@ -27,16 +27,16 @@ def displaycharacter(pk):
         player_name = player.forename
     
     if Equipment.query.count() == 0:
-        equipment = 'No Equipment'
-    elif character.pc_equipment == 'None':
-        equipment = 'No Equipment'
+        equipment = ['No Equipment']
+    elif len(character.pc_equipment) == 0:
+        equipment = ['No Equipment']
     else:
         equipment = character.pc_equipment
 
     if Spells.query.count() == 0:
-        spells = 'No Spells'
-    elif character.pc_spells == 'None':
-        spells = 'No Spells'
+        spells = ['No Spells']
+    elif len(character.pc_spells) == 0:
+        spells = ['No Spells']
     else:
         spells = character.pc_spells
     num_spells = Spells.query.count()
@@ -51,7 +51,7 @@ def displaycharacter(pk):
     elif character.level <= 16:
         proficiency = 5
     else:
-        proficiency = 5
+        proficiency = 6
     # depending on the race, some of those stats gain a racial bonus, determine that here
     if character.race == 'dragonborn':
         character.strength += 2
@@ -161,39 +161,39 @@ def displaycharacter(pk):
     survival = wisdom_bonus
     if character.fi_ability_check == 'acrobatics' or character.se_ability_check == 'acrobatics' or character.th_ability_check == 'acrobatics':
         acrobatics += proficiency
-    elif character.fi_ability_check == 'animal handling' or character.se_ability_check == 'animal handling' or character.th_ability_check == 'animal handling':
+    if character.fi_ability_check == 'animal handling' or character.se_ability_check == 'animal handling' or character.th_ability_check == 'animal handling':
         animal_handling += proficiency
-    elif character.fi_ability_check == 'arcana' or character.se_ability_check == 'arcana' or character.th_ability_check == 'arcana':
+    if character.fi_ability_check == 'arcana' or character.se_ability_check == 'arcana' or character.th_ability_check == 'arcana':
         arcana += proficiency
-    elif character.fi_ability_check == 'athletics' or character.se_ability_check == 'athletics' or character.th_ability_check == 'athletics':
+    if character.fi_ability_check == 'athletics' or character.se_ability_check == 'athletics' or character.th_ability_check == 'athletics':
         athletics += proficiency
-    elif character.fi_ability_check == 'deception' or character.se_ability_check == 'deception' or character.th_ability_check == 'deception':
+    if character.fi_ability_check == 'deception' or character.se_ability_check == 'deception' or character.th_ability_check == 'deception':
         deception += proficiency
-    elif character.fi_ability_check == 'history' or character.se_ability_check == 'history' or character.th_ability_check == 'history':
+    if character.fi_ability_check == 'history' or character.se_ability_check == 'history' or character.th_ability_check == 'history':
         history += proficiency
-    elif character.fi_ability_check == 'insight' or character.se_ability_check == 'insight' or character.th_ability_check == 'insight':
+    if character.fi_ability_check == 'insight' or character.se_ability_check == 'insight' or character.th_ability_check == 'insight':
         insight += proficiency
-    elif character.fi_ability_check == 'intimidation' or character.se_ability_check == 'intimidation' or character.th_ability_check == 'intimidation':
+    if character.fi_ability_check == 'intimidation' or character.se_ability_check == 'intimidation' or character.th_ability_check == 'intimidation':
         intimidation += proficiency
-    elif character.fi_ability_check == 'investigation' or character.se_ability_check == 'investigation' or character.th_ability_check == 'investigation':
+    if character.fi_ability_check == 'investigation' or character.se_ability_check == 'investigation' or character.th_ability_check == 'investigation':
         investigation += proficiency
-    elif character.fi_ability_check == 'medicine' or character.se_ability_check == 'medicine' or character.th_ability_check == 'medicine':
+    if character.fi_ability_check == 'medicine' or character.se_ability_check == 'medicine' or character.th_ability_check == 'medicine':
         medicine += proficiency
-    elif character.fi_ability_check == 'nature' or character.se_ability_check == 'nature' or character.th_ability_check == 'nature':
+    if character.fi_ability_check == 'nature' or character.se_ability_check == 'nature' or character.th_ability_check == 'nature':
         nature += proficiency
-    elif character.fi_ability_check == 'perception' or character.se_ability_check == 'perception' or character.th_ability_check == 'perception':
+    if character.fi_ability_check == 'perception' or character.se_ability_check == 'perception' or character.th_ability_check == 'perception':
         perception += proficiency
-    elif character.fi_ability_check == 'performance' or character.se_ability_check == 'performance' or character.th_ability_check == 'performance':
+    if character.fi_ability_check == 'performance' or character.se_ability_check == 'performance' or character.th_ability_check == 'performance':
         performance += proficiency
-    elif character.fi_ability_check == 'persuasion' or character.se_ability_check == 'persuasion' or character.th_ability_check == 'persuasion':
+    if character.fi_ability_check == 'persuasion' or character.se_ability_check == 'persuasion' or character.th_ability_check == 'persuasion':
         persuasion += proficiency
-    elif character.fi_ability_check == 'religion' or character.se_ability_check == 'religion' or character.th_ability_check == 'religion':
+    if character.fi_ability_check == 'religion' or character.se_ability_check == 'religion' or character.th_ability_check == 'religion':
         religion += proficiency
-    elif character.fi_ability_check == 'sleight of hand' or character.se_ability_check == 'sleight of hand' or character.th_ability_check == 'sleight of hand':
+    if character.fi_ability_check == 'sleight of hand' or character.se_ability_check == 'sleight of hand' or character.th_ability_check == 'sleight of hand':
         sleight_of_hand += proficiency
-    elif character.fi_ability_check == 'stealth' or character.se_ability_check == 'stealth' or character.th_ability_check == 'stealth':
+    if character.fi_ability_check == 'stealth' or character.se_ability_check == 'stealth' or character.th_ability_check == 'stealth':
         stealth += proficiency
-    elif character.fi_ability_check == 'survival' or character.se_ability_check == 'survival' or character.th_ability_check == 'survival':
+    if character.fi_ability_check == 'survival' or character.se_ability_check == 'survival' or character.th_ability_check == 'survival':
         survival += proficiency
         
         # now send all the information back to the HTML page to be displayed neatly

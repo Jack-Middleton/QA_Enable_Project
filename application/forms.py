@@ -50,9 +50,9 @@ class CreatePlayerCharacter(FlaskForm):
     level = SelectField('Current Level', choices = [('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),\
         ('6','6'),('7','7'),('8','8'),('9','9'),('10','10'),('11','11'),('12','12'),('13','13'),('14','14'),\
             ('15','15'),('16','16'),('17','17'),('18','18'),('19','19'),('20','20')])
-    race = SelectField('Race', choices=[('Dragonborn', 'dragonborn'), ('Dwarf','dwarf'), ('Human', 'human'), \
-        ('Elf', 'elf'), ('Half-Elf', 'half-elf'), ('Gnome', 'gnome'), ('Halfling', 'halfling'), ('Half-Orc', 'half-orc'), ('Human', 'human'), \
-            ('Tiefling', 'tiefling')] )
+    race = SelectField('Race', choices=[('dragonborn', 'dragonborn'), ('dwarf','dwarf'), ('human', 'human'), \
+        ('elf', 'elf'), ('half-elf', 'half-elf'), ('gnome', 'gnome'), ('halfling', 'halfling'), ('half-Orc', 'half-orc'), ('human', 'human'), \
+            ('tiefling', 'tiefling')] )
     class_ = SelectField('Class', choices=[('Barbarian', 'barbarian'), ('Bard', 'bard'),('Cleric', 'cleric'),('Druid', 'druid'),('Fighter', 'fighter'),  ('Ranger', 'ranger'),\
         ('Monk', 'monk') ,('Paladin', 'paladin'), ('Rogue', 'rogue'), ('Sorcerer', 'sorcerer'), ('Wizard', 'wizard'),('Warlock', 'warlock')])
     strength = SelectField('Strength Score', choices = [('0', '0'), ('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),\
