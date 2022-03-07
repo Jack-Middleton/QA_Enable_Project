@@ -3,7 +3,7 @@
 <h2> {{ptitle}} </h2>
 
 {% for player in list %}
-{{ player.__str__() }}
+<h3> {{ player.__str__() }} </h3>
 <div class="btn-group">
   <button type="button" class="btn btn-primary"><a href="{{ url_for('updateplayer', pk=player.player_id)}}">Update Player</a> </button>
   <button type="button" class="btn btn-primary"><a href="{{url_for('deleteplayer', pk = player.player_id) }}"> Delete Player</a> </button>
