@@ -42,8 +42,6 @@ class Player_character(db.Model):
     wisdom = db.Column(db.Integer)
     constitution = db.Column(db.Integer)
     charisma = db.Column(db.Integer)
-    first_saving_throw = db.Column(db.String(15))
-    second_saving_throw = db.Column(db.String(15))
     fi_ability_check = db.Column(db.String(15))
     se_ability_check = db.Column(db.String(15))
     th_ability_check = db.Column(db.String(15))
