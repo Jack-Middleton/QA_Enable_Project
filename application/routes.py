@@ -35,13 +35,19 @@ def deletedm(pk):
 @app.route('/searchnpc/int:<pk>')
 def searchnpc(pk):
     dm = DM.query.get(pk)
-    dm_npcs = dm.dm_npcs
+    if len(dm.dm_npcs) == 0:
+        return render_template('blankSearch.html', ptitle="No NPCs to display!")
+    else:
+        dm_npcs = dm.dm_npcs
     return render_template('SearchNPC.html',list = dm_npcs, ptitle = f"List of NPCs for {dm.forename}")
 
 @app.route('/searchplayer/<int:pk>')
 def searchplayer(pk):
     dm = DM.query.get(pk)
-    dm_players = dm.dm_players
+    if len(dm.dm_players) == 0:
+        return render_template('blankSearch.html', ptitle="No Players to display!")
+    else:
+        dm_players = dm.dm_players
     return render_template('searchPlayer.html', list = dm_players, ptitle = f"List of players for {dm.forename}")
 
 
@@ -157,7 +163,10 @@ def deleteplayer(pk):
 @app.route('/searchcharacter/<int:pk>')
 def searchcharacter(pk):
     player = Player.query.get(pk)
-    player_character = player.player_characters
+    if len(player.player_characters) == 0:
+        return render_template('blankSearch.html', ptitle = "No characters to display!")
+    else:
+        player_character = player.player_characters
     return render_template('searchCharacter.html', list = player_character, ptitle = f"List of characters for {player.forename}")
 
 

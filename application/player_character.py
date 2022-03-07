@@ -249,12 +249,17 @@ def createcharacter():
 @app.route('/searchspells/<int:pk>')
 def searchspells(pk):
     character = Player_character.query.get(pk)
-    pc_spells = character.pc_spells
+    if len(character.pc_spells) == 0:
+        return render_template('blankSearch.html', ptitle=f"{character.name} has no spells!")
+    else:
+        pc_spells = character.pc_spells
     return render_template('searchSpells.html', list = pc_spells, ptitle = f"List of Spells for {character.name}")
 
 @app.route('/searchequipment/<int:pk>')
 def searchequipment(pk):
     character = Player_character.query.get(pk)
+    if len(character.pc_equipment) == 0:
+        return render_template('blankSearch.html', ptitle=f"{character.name} has no equipment! ")
     pc_equipment = character.pc_equipment
     return render_template('searchEquipment.html', list = pc_equipment, ptitle = f"List of Equipment for {character.name}")
      
