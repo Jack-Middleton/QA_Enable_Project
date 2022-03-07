@@ -39,9 +39,10 @@
         <li><a href="#what-went-wrong">What went wrong</a></li>
     </li>
     <li><a href="#Possible-improvements-for-future-revisions">Possible improvements for future revisions</a></li>
-    <li><a href="#API-Screenshots">API Screenshots</a></li>
-    <li><a href="#Database-screenshots-to-show-Data-is-being-persistence">Database screenshots to show Data is being Persisted</a></li>
+    <li><a href="#API-Screenshots">APP Screenshots</a></li>
+    <li><a href="#Database-screenshots-to-show-Data-is-being-persistence">Code Snippets</a></li>
     <li><a href="#Link-to-my-jira-board">Link to my Jira board</a></li>
+    <li><a href="#Test-Coverage">Test Coverage</a></li>
 
   </ol>
 </details>
