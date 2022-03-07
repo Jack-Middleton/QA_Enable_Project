@@ -3,12 +3,13 @@
 <h2> {{ptitle}} </h2>
 {% for npc in list %}
 {{ npc.__str__() }}
-
 <div class="btn-group">
     <button type="button" class="btn btn-primary"><a href="{{ url_for('updatenpc', pk=npc.npc_id)}}">Update NPC</a> </button>
     <button type="button" class="btn btn-primary"><a href="{{url_for('deletenpc', pk = npc.npc_id) }}"> Delete </a> </button>
   </div>
   <br><br>
 {% endfor %}
+
+
 {% endblock body %}
 

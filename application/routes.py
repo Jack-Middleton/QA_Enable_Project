@@ -36,7 +36,15 @@ def deletedm(pk):
 def searchnpc(pk):
     dm = DM.query.get(pk)
     dm_npcs = dm.dm_npcs
-    return render_template('DMsearch.html',list = dm_npcs, ptitle = "List of DM associated NPCs")
+    return render_template('SearchNPC.html',list = dm_npcs, ptitle = f"List of NPCs for {dm.forename}")
+
+@app.route('/searchplayer/<int:pk>')
+def searchplayer(pk):
+    dm = DM.query.get(pk)
+    dm_players = dm.dm_players
+    return render_template('searchPlayer.html', list = dm_players, ptitle = f"List of players for {dm.forename}")
+
+
 
 @app.route('/updatedm/<int:pk>', methods=['POST', 'GET'])
 def updatedm(pk):
@@ -146,7 +154,15 @@ def deleteplayer(pk):
     db.session.commit()
     return redirect(url_for('home'))
 
+@app.route('/searchcharacter/<int:pk>')
+def searchcharacter(pk):
+    player = Player.query.get(pk)
+    player_character = player.player_characters
+    return render_template('searchCharacter.html', list = player_character, ptitle = f"List of characters for {player.forename}")
+
+
 # Below is the CRUD functionality for the Equipment table
+
 
 @app.route('/createEquipment', methods=['GET', 'POST'])
 def createEquipment():

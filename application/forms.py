@@ -22,7 +22,7 @@ class CreatePlayer(FlaskForm):
     submit = SubmitField('Submit')
 
 class CreateEquipment(FlaskForm):
-    pc_id = SelectField('Associated Character', choices=[])
+    pc_id = SelectField('Associated Character', choices=[('None', 'None')])
     equipment_name = StringField('Equipment Name')
     equipment_details = StringField('Equipment Details')
     is_weapon = BooleanField('Is it a weapon?')
@@ -34,7 +34,7 @@ class CreateEquipment(FlaskForm):
     submit = SubmitField('Submit')
 
 class CreateSpell(FlaskForm):
-    pc_id = SelectField('Associated Character', choices=[])
+    pc_id = SelectField('Associated Character', choices=[('None', 'None')])
     spell_name = StringField('Spell Name')
     spell_details = StringField('Spell Details')
     spell_level = SelectField('Spell Level', choices=[('0','0'),('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9')] )

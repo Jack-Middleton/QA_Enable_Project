@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block body %} 
+<h2> {{ptitle}} </h2>
+
+{% for character in list %}
+{{ character.__str__() }}
+<div class="btn-group">
+  <button type="button" class="btn btn-primary"><a href="{{ url_for('deletecharacter', pk=character.pc_id)}}">Delete Player</a> </button>
+  <button type="button" class="btn btn-primary"><a href="{{url_for('updatecharacter', pk = character.pc_id) }}"> Update Player</a> </button>
+  <button type="button" class="btn btn-primary">
+    <a href="{{ url_for('displaycharacter', pk=character.pc_id)}}">Display Character Sheet</a>
+</button>
+</div>
+<br><br>
+{% endfor %} 
+
+{% endblock body %}
