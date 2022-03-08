@@ -129,13 +129,15 @@ in the second image, I expanded on my initial idea adding in a dm, npc, spell an
 <!-- CONTRIBUTING -->
 ## API Screenshots
 
-### Get All
+### Read
+
+### Read by PK
 
 ### Create Method
 
-### Delete By ID
+### Delete By PK
 
-### Update By ID
+### Update By PK
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
