@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, BooleanField, SelectField, SubmitField
+from wtforms import StringField, BooleanField, SelectField, SubmitField
+from wtforms.validators import DataRequired
 
 class CreateDM(FlaskForm):
     forename = StringField('Forename')
@@ -42,7 +43,7 @@ class CreateSpell(FlaskForm):
 
 
 class CreatePlayerCharacter(FlaskForm):
-    player_id = SelectField('Associated Player', choices=[('None', 'None')])
+    player_id = SelectField('Associated Player', choices=[], validators=[DataRequired()])
     name = StringField('Characters Name')
     # choices are 1 to 20 hard coded in because levels cannot be lower than 1 or higher than 20
     # this works the same for other stats, but they go up to 24 as some items and abilities allow
