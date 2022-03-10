@@ -32,7 +32,7 @@ def deletedm(pk):
     db.session.commit()
     return redirect(url_for('home'))
 
-@app.route('/searchnpc/int:<pk>')
+@app.route('/searchnpc/<int:pk>')
 def searchnpc(pk):
     dm = DM.query.get(pk)
     if len(dm.dm_npcs) == 0:
