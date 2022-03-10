@@ -34,7 +34,7 @@ The brief for this project was to design and produce a web app of my choosing. I
 
 ![App Structure](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/project%20brief%20diagram.png)
 
-The App was also required to have at least Unit Testing completed with a high-level of coverage, Unit Testing was considered a stretch goal. 
+The App was also required to have at least Unit Testing completed with a high-level of coverage,Integration Testing was considered a stretch goal. 
 The project was also required to have implementation of several stages of a CI pipeline, such as Project Tracking, a VCS (Version Control System), a Development Environment and a Build Server.
 
 
@@ -278,11 +278,19 @@ Thankfully I got the issue resolved and have managed to work using the Feature B
   <li> Add a spell list table, acting as a join between characters and spells to create a many to many relationship (characters dont just have 'spells', they have spell lists drawn from a shared pool of spells </li>
  </ul>
 
+## Known Bugs
+
+As of 1.1.1, you can now enter routes directly in to the browser and cause exceptions to be raised, this only occured when switching to the live SQL environment, will investigate. 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 ## Updates
+1.1.1
+<ul>
+  <li> Whereas before you could create Equipment / Spells etc. without needing to enter a foreign key (associated character etc.), for some reason after switching to live SQL environment it started raising exceptions. Added validation to all foreign key fields, now creating a one to many relationship between all tables. </li>
+ </ul>
+
 1.0.1
 <ul>
   <li> Fixed small route bug for the searchnpc route </li>
@@ -290,7 +298,7 @@ Thankfully I got the issue resolved and have managed to work using the Feature B
 
 
 ## Version
-1.0.1
+1.1.1
 
 
 
