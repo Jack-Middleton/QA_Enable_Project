@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block body %} 
+    <h2>{{ ptitle }}</h2>
+    <div class="Form">
+
+        <form method="POST" action="">
+
+            {{ form.hidden_tag() }}
+            {{ form.pc_id.label }} || {{ form.pc_id }}
+            <br>
+            {{ form.equipment_name.label }} || {{ form.equipment_name }}
+            <br>
+            {{ form.equipment_details.label }} || {{ form.equipment_details }}
+            <br>
+            {{ form.is_weapon.label }} || {{ form.is_weapon }}
+            <br>
+            {{ form.str_dex.label }} || {{ form.str_dex }}
+            <br>
+            {{ form.distance.label }} || {{ form.distance }}
+            <br>
+            {{ form.dice_type.label }} || {{ form.dice_type }}
+            <br>
+            {{ form.rarity.label }} || {{ form.rarity }}
+            <br>
+            {{ form.submit }}
+
+        </form>
+
+    </div>
+{% endblock body %}
