@@ -1,6 +1,5 @@
 # QA_Enable_Project
 
-## Currently a placeholder README
 
 <div id="top"></div>
 
@@ -29,20 +28,20 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#The-idea">The idea</a>
-        <li><a href="#built-with">Built With</a></li>
+      <a href="#The-Project">The Project</a>
+        <li><a href="#Built-With">Built With</a></li>
     </li>
-  <li><a href="Entity-Relationship-Diagrams"> Entity Relationship Diagrams </a></li>
+  <li><a href="The-Design"> The Design </a></li>
     <li>
-      <a href="#getting-started">Getting Started</a>    
-        <li><a href="#what-went-well">What went well</a></li>
-        <li><a href="#what-went-wrong">What went wrong</a></li>
+      <a href="#CI-Pipeline">CI Pipeline</a>    
+        <li><a href="#Risk-Assessment">Risk Assessment</a></li>
+        <li><a href="#what-went-wrong">Testing</a></li>
     </li>
-    <li><a href="#Possible-improvements-for-future-revisions">Possible improvements for future revisions</a></li>
-    <li><a href="#API-Screenshots">APP Screenshots</a></li>
-    <li><a href="#Database-screenshots-to-show-Data-is-being-persistence">Code Snippets</a></li>
-    <li><a href="#Link-to-my-jira-board">Link to my Jira board</a></li>
-    <li><a href="#Test-Coverage">Test Coverage</a></li>
+    <li><a href="#Possible-improvements-for-future-revisions">The App</a></li>
+    <li><a href="#What-went-wrong">What Went Wrong</a></li>
+    <li><a href="#Possible-improvements-for-future-revisions">Possibble improvements for future revisions</a></li>
+    <li><a href="#Updates">Updates</a></li>
+    <li><a href="#Version">Version</a></li>
 
   </ol>
 </details>
