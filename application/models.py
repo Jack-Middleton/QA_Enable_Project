@@ -50,10 +50,10 @@ class Player_character(db.Model):
 
 class Spells(db.Model):
     spell_id = db.Column(db.Integer, primary_key=True)
-    fk_pc_id = db.Column(db.Integer, db.ForeignKey('player_character.pc_id'))
+    fk_pc_id = db.Column(db.Integer, db.ForeignKey('player_character.pc_id'), nullable= True)
     spell_name = db.Column(db.String(255))
     spell_details = db.Column(db.String(1000))
-    spell_level = db.Column(db.Integer)
+    spell_level = db.Column(db.String(10))
     def __str__(self):
         if self.spell_level == 0:
             return f"{self.spell_name}, {self.spell_details}. This spell is a Cantrip"
@@ -72,7 +72,7 @@ class Equipment(db.Model):
     # is the weapon ranged or melee
     distance = db.Column(db.String(10))
     # what hit dice does the weapon use if any 
-    dice_type = db.Column(db.Integer)
+    dice_type = db.Column(db.String(10))
     # determines rarity - common through to legendary (inc magic or non)
     rarity = db.Column(db.String(15))
     # revisions

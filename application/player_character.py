@@ -260,7 +260,8 @@ def searchequipment(pk):
     character = Player_character.query.get(pk)
     if len(character.pc_equipment) == 0:
         return render_template('blankSearch.html', ptitle=f"{character.name} has no equipment! ")
-    pc_equipment = character.pc_equipment
+    else: 
+        pc_equipment = character.pc_equipment
     return render_template('searchEquipment.html', list = pc_equipment, ptitle = f"List of Equipment for {character.name}")
      
 

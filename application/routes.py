@@ -32,7 +32,7 @@ def deletedm(pk):
     db.session.commit()
     return redirect(url_for('home'))
 
-@app.route('/searchnpc/<int:pk>')
+@app.route('/searchnpc/int:<pk>')
 def searchnpc(pk):
     dm = DM.query.get(pk)
     if len(dm.dm_npcs) == 0:
@@ -164,6 +164,8 @@ def deleteplayer(pk):
 def searchcharacter(pk):
     player = Player.query.get(pk)
     if len(player.player_characters) == 0:
+        return render_template('blankSearch.html', ptitle = "No characters to display!")
+    elif player.isEmpty():
         return render_template('blankSearch.html', ptitle = "No characters to display!")
     else:
         player_character = player.player_characters

@@ -8,7 +8,7 @@ class CreateDM(FlaskForm):
     submit = SubmitField('Submit')
 
 class CreateNPC(FlaskForm):
-    dm_id = SelectField('Associated DM', choices=[])
+    dm_id = SelectField('Associated DM', choices=[], validators=[DataRequired()])
     npc_name = StringField('Name of NPC')
     npc_race = SelectField('NPC Race', choices=[('Dragonborn', 'Dragonborn'), ('Dwarf','Dwarf'), ('Human', 'Human'), \
         ('Elf', 'Elf'), ('Half-Elf', 'Half-Elf'), ('Gnome', 'Gnome'), ('Halfling', 'Halfling'), ('Half-Orc', 'Half-Orc'), ('Human', 'Human'), \
@@ -17,13 +17,13 @@ class CreateNPC(FlaskForm):
     submit = SubmitField('Submit')
 
 class CreatePlayer(FlaskForm):
-    dm_id = SelectField('Associated DM', choices=[])
+    dm_id = SelectField('Associated DM', choices=[], validators=[DataRequired()])
     forename = StringField('Forename')
     surname = StringField('Surname')
     submit = SubmitField('Submit')
 
 class CreateEquipment(FlaskForm):
-    pc_id = SelectField('Associated Character', choices=[('None', 'None')])
+    pc_id = SelectField('Associated Character', choices=[], validators=[DataRequired()])
     equipment_name = StringField('Equipment Name')
     equipment_details = StringField('Equipment Details')
     is_weapon = BooleanField('Is it a weapon?')
@@ -35,7 +35,7 @@ class CreateEquipment(FlaskForm):
     submit = SubmitField('Submit')
 
 class CreateSpell(FlaskForm):
-    pc_id = SelectField('Associated Character', choices=[('None', 'None')])
+    pc_id = SelectField('Associated Character', choices=[], validators=[DataRequired()])
     spell_name = StringField('Spell Name')
     spell_details = StringField('Spell Details')
     spell_level = SelectField('Spell Level', choices=[('0','0'),('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9')] )
