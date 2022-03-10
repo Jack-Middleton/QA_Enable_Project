@@ -31,7 +31,9 @@ This repository contains my deliverable for the QA devops fundamental project.
 <!-- ABOUT THE PROJECT -->
 ## The Project
 The brief for this project was to design and produce a web app of my choosing. It was required to have CRUD functionality (Create, Read, Update and Delete), needed to use the Flask micro-framework and had to store data in a MySQL database that had a minimum of two tables sharing a one to many relationship.
+
 ![App Structure](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/project%20brief%20diagram.png)
+
 The App was also required to have at least Unit Testing completed with a high-level of coverage, Unit Testing was considered a stretch goal. 
 The project was also required to have implementation of several stages of a CI pipeline, such as Project Tracking, a VCS (Version Control System), a Development Environment and a Build Server.
 
