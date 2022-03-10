@@ -67,6 +67,8 @@ The project was also required to have implementation of several stages of a CI p
 * [Flask](https://flask.palletsprojects.com/en/2.0.x/)
 * [Jenkins](https://www.jenkins.io/doc/)
 * [Github](https://docs.github.com/en)
+* [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+* [Bootstrap](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -145,11 +147,11 @@ I followed the basic principles of a Risk Assessment Matrix for this task, using
 
 The key for the risk assessment is below: 
 
-![Risks Key]()
+![Risks Key](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/Risk%20Assessment%20Key.png)
 
 and the Risk Assessment was as follows:
 
-![Risk Assessment]()
+![Risk Assessment](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/Risk%20Assessment.png)
 
 As a result of the Risk Assessment, the following control measures were implemented into the project. 
 User profiles were not implemented, as this would require sending some form of authentication over an unsecured HTTP connection. I would like to implement this at a later stage, and the Risk Assessment and control measures will be updated accordingly. 
@@ -167,19 +169,108 @@ As this is not a production app, tests such as security tets and performance tes
 
 As mentioned previously, these tests are automated via Jenkins using webhooks, a successful build in which all tests pass is shown below, along with the commit that triggered it to show the time stamps and that the commit did in fact trigger the tests:
 
-![Github commit]()
+![Github commit](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/commit%20that%20triggered%20Jenkins.png)
 
-![Jenkins Automated Test]()
+![Jenkins Automated Test](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/Jenkins%20Trigger.png)
 
 A coverage report artefact was also generated and archived during the build and saved as a html file, the coverage report for the above build was:
 
-![Coverage Report]()
+![Coverage Report](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/html%20coverage%20report.png)
 
 Showing 100% test coverage overall, all tests must pass for a build to be considered successful. 
 
+
+The other type of testing not implemented is, as mentioned previously, Integration testing. 
+Integration testing tests the function of an app in an as-live environment, being able to simulate keyboard input and mouse clicks to ensure that these elements of the app function as intended.
+
+If I were to add Integration Tests, I would need Selenium, which as of right now has versioning issues on Ubuntu 20.04 machines. My Machine is 18.04 so it shouldnt pose an issue, but for other projects I'd need either a specific instance for Integration Testing or make sure my machine was on 18.04 during config. 
+I'd also need Chromium Browser as a browser for integration tests and Wget and Unzip as the driver for chromium browser. 
+In the config I'd set it to (--headless) which tells it to run in the terminal and not in a browser, and from there I could simulate button presses and make assertions to check that my Forms function as intended. 
+
 ## The App
 
+So when you go to the homepage of the app, with no data entered it looks as below: 
 
+![Blank home page](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/Blank%20Homepage.png)
+
+Before we do anything else, I wanted to account for edge cases, for example if someone put /displaycharacter/1 into the search bar without any characters or character sheets being made, the same going for the searchnpc, searchplayer, searchspells and searchequipment, the results of which are below:
+
+![Search No NPC](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/DM%20no%20NPCs.png)
+
+![Search no Player](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/DM%20no%20players.png)
+
+![Search no Spells](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/Character%20no%20spells.png)
+
+![Search no equipment](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/character%20no%20equipment.png)
+
+![Search no character](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/Player%20no%20characters.png)
+
+As you can see, it still displays a page showing that none exist rather than raising an exception.
+
+Looking at the page as it stands, we have the ability to create a DM, an NPC, a Player, a Character, Equipment and Spells, the pages and forms for the tables are as shown: 
+
+![Create DM](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/create%20DM%20page.png)
+
+![Create NPC](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/Create%20NPC%20page.png)
+
+![Create Player](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/Create%20Player%20page.png)
+
+![Create Character](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/Sample%20Character.png)
+
+![Create Weapon](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/Sample%20weapon%20creation.png)
+
+![Create Spells](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/spell%20no%20character.png)
+
+I've also created a Spell at level 0 and a Piece of Armour instead of a weapon, to show the difference in how they're displayed on the home screen:
+
+![Create Armour](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/Sample%20armour%20creation.png)
+
+![Create Spell L0](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/sample%20spell%2C%20FK%20and%20cantrip.png)
+
+![Equipment display](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/weapon%20and%20armour%20display.png)
+
+![Spell display](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/spell%20display.png)
+
+Firstly, I'll show a character sheet with no spells or equipment attributed to it, to show how its displayed in this instance: 
+
+![Character no sp or equip](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/Character%20sheet%20display%20no%20equipment.png)
+
+and again, as you can see no errors have been raised.
+The character sheet with Spells and Equipment attached is as follows
+
+![Character sheet](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/character%20sheet%20with%20spells%20and%20equipment.png)
+
+Now back to the homepage, when there is data for all sections it looks like so: 
+
+![Full home page](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/homepage%20with%20details.png)
+
+You have the ability to search for a DMs players or NPCs, a players characters and a characters spells or equipment, which looks like so: 
+
+![searchplayer](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/Sample%20Player.png)
+
+![searchNPC](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/searchNPC.png)
+
+![searchcharacter](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/player%20character%20search.png)
+
+Spells and Equipment searches have been shown above but look like so:
+
+![equipment](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/weapon%20and%20armour%20display.png)
+![spell](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/spell%20display.png)
+
+Updating an item takes you to the same page as the create page, except this time it updates the entry rather than creating a new one
+
+![Update one](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/update%20DM%20and%20player.png)
+
+To show the updates working, you can see that the Updated Sample DM and Updated Sample player have the same ID as the original, but an updated name
+
+and the delete works as intended, heres the front page missing a couple of entries to show it works. 
+
+![delete](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/delete%20spell%20and%20character.png)
+
+
+Lastly, when creating a character there must be a Player to attribute it to so I added Validation on the backend, and just to prove that it works: 
+
+![validation](https://github.com/Jack-Middleton/QA_Enable_Project/blob/main/Pictures%20For%20Readme/Validation%20Proof.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -200,12 +291,24 @@ Thankfully I got the issue resolved and have managed to work using the Feature B
 
 <!-- ROADMAP -->
 ## Possible improvements for future revisions
+<ul>
+  <li> I would like the update function to retain the information already existing in the entry, so as to make updating easier without the possibility of accidentally missing a section </li>
+  <li> Add a spell list table, acting as a join between characters and spells to create a many to many relationship (characters dont just have 'spells', they have spell lists drawn from a shared pool of spells </li>
+ </ul>
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+## Updates
+1.0.1
+<ul>
+  <li> Fixed small route bug for the searchnpc route </li>
+</ul>
 
 
+## Version
+1.0.1
 
 
 
