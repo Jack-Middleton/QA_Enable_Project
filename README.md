@@ -39,7 +39,7 @@
     </li>
     <li><a href="#Possible-improvements-for-future-revisions">The App</a></li>
     <li><a href="#What-went-wrong">What Went Wrong</a></li>
-    <li><a href="#Possible-improvements-for-future-revisions">Possibble improvements for future revisions</a></li>
+    <li><a href="#Possible-improvements-for-future-revisions">Possible improvements for future revisions</a></li>
     <li><a href="#Updates">Updates</a></li>
     <li><a href="#Version">Version</a></li>
 
